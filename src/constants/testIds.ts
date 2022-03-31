@@ -9,6 +9,7 @@ const Home = {
 }
 
 const Profile = {
+  NAME: 'profile_name',
   USERNAME: 'profile_username',
   JOINED_AT: 'profile_joined-at',
   FOLLOWERS: 'profile_followers',

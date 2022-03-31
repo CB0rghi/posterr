@@ -10,7 +10,7 @@ describe('Author', () => {
   it('renders username', () => {
     const username = screen.getByTestId(TestIds.Author.USERNAME)
     expect(username).toBeInTheDocument()
-    expect(username.textContent).toBe(`@${mockedAuthor.username}`)
+    expect(username.textContent).toBe(mockedAuthor.username)
   })
 
   it('render picture', () => {

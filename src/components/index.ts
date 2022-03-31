@@ -1,4 +1,5 @@
 export { default as Author } from './Author/Author'
+export { default as CustomButton } from './CustomButton/CustomButton'
 export { default as Loader } from './Loader/Loader'
 export { default as Feed } from './Feed/Feed'
 export { default as Post } from './Post/Post'

@@ -1,10 +1,18 @@
 import React, { useEffect } from 'react'
 import { Messages, Texts } from 'src/constants'
-import { useFeedStore, useProfileStore } from 'src/stores'
+import { useAuthStore, useFeedStore, useLayoutStore } from 'src/stores'
 import PostComponent from 'src/components/Post/Post'
 
-export default function Feed() {
-  const { user } = useProfileStore((store) => ({ user: store.user }))
+const Feed = () => {
+  const { startLoading, stopLoading } = useLayoutStore(
+    (store) => (
+      {
+        startLoading: store.startLoading,
+        stopLoading: store.stopLoading
+      })
+  )
+
+  const { user } = useAuthStore((store) => ({ user: store.loggedUser }))
   const {
     filter, loadAllPosts, loadFollowingPosts, posts
   } = useFeedStore(
@@ -21,6 +29,7 @@ export default function Feed() {
   useEffect(() => {
     const loadPosts = async () => {
       const isFollowing = filter === Texts.FOLLOWING
+      startLoading(Messages.LOADING_ITEM(Texts.POSTS))
       if (isFollowing) {
         // Load following posts only
         await loadFollowingPosts(user)
@@ -28,6 +37,7 @@ export default function Feed() {
         // Load all posts
         await loadAllPosts()
       }
+      stopLoading()
     }
 
     loadPosts()
@@ -51,3 +61,5 @@ export default function Feed() {
 
   return render()
 }
+
+export default Feed

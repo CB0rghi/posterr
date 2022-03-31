@@ -2,19 +2,13 @@ import React from 'react'
 import { render, screen } from '@testing-library/react'
 import { TestIds, Texts } from 'src/constants'
 import Profile from 'src/types/profile'
+import mockUser from 'src/mocks/user'
 import UserProfile from './UserProfile'
 
 describe('User Profile', () => {
   const profileMock: Profile = {
     posts: [],
-    user: {
-      id: 0,
-      name: '',
-      followers: [],
-      followingIds: [],
-      picturePath: '',
-      username: ''
-    },
+    user: mockUser,
     joinedAt: new Date(),
     followers: 0,
     following: 0

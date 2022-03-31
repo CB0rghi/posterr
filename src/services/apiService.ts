@@ -1,27 +1,29 @@
-import { Post } from 'src/types'
+import { BaseResponse } from 'src/types'
 import axios from 'axios'
-import { Routes } from 'src/constants'
+import { Messages } from 'src/constants'
+import { mockThrottle, validateResponse } from 'src/modules/api'
 
 interface Api {
-  getPosts: () => Promise<Post[]>
-  getPostsByAuthorIds: (ids: number[]) => Promise<Post[]>
+  get: <TResponse>(route: string) => Promise<BaseResponse<TResponse>>
+  patch: <TRequest, TResponse>(route: string, body: TRequest) => Promise<BaseResponse<TResponse>>
+  post: <TRequest, TResponse>(route: string, body: TRequest) => Promise<BaseResponse<TResponse>>
 }
 
-const baseApi = 'http://localhost:3001/'
+const baseApi = 'http://localhost:3001/' // This would come from .env file
 
-const orderByDateDesc = '_sort=timestamp&_order=desc'
 const api: Api = {
-  getPosts: async () => {
-    const response = await axios.get(`${baseApi}${Routes.POSTS}?${orderByDateDesc}`)
-    const { data, status } = response
-    if (status === 200) { return data as Post[] }
-    return []
+  get: async <T>(route: string) => {
+    await mockThrottle()
+    const axiosResponse = await axios.get(`${baseApi}${route}`)
+    return validateResponse<T>(axiosResponse, Messages.ERROR_GETTING_ROUTE(route))
   },
-  getPostsByAuthorIds: async (ids: number[]) => {
-    const response = await axios.get(`${baseApi}${Routes.POSTS}?author.id_like=[${ids.toString()}]&${orderByDateDesc}`)
-    const { data, status } = response
-    if (status === 200) return data as Post[]
-    return []
+  patch: async <TRequest, TResponse>(route: string, body: TRequest) => {
+    const axiosResponse = await axios.patch(`${baseApi}${route}`, body)
+    return validateResponse<TResponse>(axiosResponse, Messages.ERROR_UPDATING(route))
+  },
+  post: async <TRequest, TResponse>(route: string, body: TRequest) => {
+    const axiosResponse = await axios.post(`${baseApi}${route}`, body)
+    return validateResponse<TResponse>(axiosResponse, Messages.ERROR_UPDATING(route))
   }
 }
 

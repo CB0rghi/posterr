@@ -32,11 +32,13 @@ module.exports = {
       }
     ],
     '@typescript-eslint/no-empty-function': 'off',
+    '@typescript-eslint/no-explicit-any': 'off',
     'comma-dangle': ['error', 'never'],
     'no-use-before-define': 'off',
     'react/jsx-filename-extension': [2, { extensions: ['.js', '.jsx', '.ts', '.tsx'] }],
     'react/jsx-props-no-spreading': 'off',
     'react/jsx-uses-react': 'error',
+    'react/require-default-props': 'off',
     'react/jsx-uses-vars': 'error',
     'import/extensions': [
       'error',
@@ -48,6 +50,8 @@ module.exports = {
     ],
     'import/prefer-default-export': 'off',
     'no-shadow': 'off',
+    'no-return-await': 'off',
+    'no-promise-executor-return': 'off',
     'react/function-component-definition': [
       2,
       {
