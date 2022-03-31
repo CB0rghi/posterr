@@ -15,8 +15,10 @@ const initialState: Profile = {
   following: 0,
   posts: [],
   user: {
-    id: '',
-    name: '',
+    id: 1,
+    name: 'Caio Borghi',
+    followers: [],
+    followingIds: [2, 3],
     picturePath: '',
     username: ''
   }

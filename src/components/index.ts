@@ -1,1 +1,6 @@
 export { default as Author } from './Author/Author'
+export { default as Loader } from './Loader/Loader'
+export { default as Feed } from './Feed/Feed'
+export { default as Post } from './Post/Post'
+export { default as PostsFilter } from './PostsFilter/PostsFilter'
+export { default as PostType } from './PostType/PostType'

@@ -1,7 +1,9 @@
 type User = {
-  id: string
+  id: number
   name: string
   username: string
+  followers: []
+  followingIds: number[]
   picturePath: string
 }
 

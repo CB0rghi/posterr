@@ -1,8 +1,8 @@
 import React from 'react'
 import { Post } from 'src/types'
-import { Author } from 'src/components'
 import { TestIds } from 'src/constants'
 import PostType from '../PostType/PostType'
+import Author from '../Author/Author'
 
 export default function PostComponent(props: Post) {
   const { author, text, type } = props

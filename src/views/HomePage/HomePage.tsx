@@ -1,16 +1,29 @@
 import React, { useEffect, useState } from 'react'
-import Feed from 'src/components/Feed/Feed'
-import Loader from 'src/components/Loader/Loader'
+import { Loader, PostsFilter, Feed } from 'src/components'
 import { useFeedStore } from 'src/stores'
+import { useLocation } from 'react-router-dom'
+import { PostType } from 'src/modules'
+import { Texts } from 'src/constants'
 
 function HomePage() {
+  const location = useLocation()
   const [loading, setLoading] = useState(false)
-  const { loadAllPosts } = useFeedStore((store) => ({ loadAllPosts: store.loadAllPosts }))
+  const {
+    setFilter
+  } = useFeedStore((store) => ({
+    setFilter: store.setFilter
+  }))
 
   useEffect(() => {
     const init = async () => {
       setLoading(true)
-      await loadAllPosts()
+      const { pathname } = location
+      const isFollowing = PostType.isFollowing(pathname)
+      if (isFollowing) {
+        setFilter(Texts.FOLLOWING)
+      } else {
+        setFilter(Texts.ALL)
+      }
       setLoading(false)
     }
     init()
@@ -20,6 +33,7 @@ function HomePage() {
     if (loading) return <Loader />
     return (
       <div>
+        <PostsFilter />
         <Feed />
       </div>
     )

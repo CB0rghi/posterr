@@ -8,8 +8,10 @@ describe('User Profile', () => {
   const profileMock: Profile = {
     posts: [],
     user: {
-      id: '',
+      id: 0,
       name: '',
+      followers: [],
+      followingIds: [],
       picturePath: '',
       username: ''
     },

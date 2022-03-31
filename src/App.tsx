@@ -3,6 +3,7 @@ import './App.css'
 import { Routes, Route } from 'react-router-dom'
 import HomePage from './views/HomePage/HomePage'
 import UserProfile from './views/UserProfile/UserProfile'
+import { Routes as CustomRoutes } from './constants'
 
 function App() {
   return (
@@ -12,6 +13,8 @@ function App() {
     >
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path={CustomRoutes.ALL} element={<HomePage />} />
+        <Route path={CustomRoutes.FOLLOWING} element={<HomePage />} />
         <Route path="profile" element={<UserProfile />} />
       </Routes>
     </div>
