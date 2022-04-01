@@ -1,20 +1,17 @@
 import React from 'react'
 import { render, screen } from '@testing-library/react'
 import { TestIds, Texts } from 'src/constants'
-import Profile from 'src/types/profile'
+import { Profile as ProfileType } from 'src/types'
 import mockUser from 'src/mocks/user'
-import UserProfile from './UserProfile'
+import Profile from './Profile'
 
 describe('User Profile', () => {
-  const profileMock: Profile = {
+  const profileMock: ProfileType = {
     posts: [],
-    user: mockUser,
-    joinedAt: new Date(),
-    followers: 0,
-    following: 0
+    user: mockUser
   }
 
-  render(<UserProfile />)
+  render(<Profile />)
   it('shows user data', async () => {
     const username = screen.getByTestId(TestIds.Profile.USERNAME)
     const joinedAt = screen.getByTestId(TestIds.Profile.JOINED_AT)

@@ -5,13 +5,13 @@ import { errorResponse, successResponse } from 'src/types/baseResponse'
 
 export const waitFor = async (ms: number) => await new Promise((resolve) => setTimeout(resolve, ms))
 
-const throtlleMilliseconds = 1000
+const throtlleMilliseconds = 0
 // TODO: Add time to mock throtlle
 export const mockThrottle = async () => waitFor(throtlleMilliseconds)
 
-export const logError = (data: any, status: number) => {
+export const logError = (message: string) => {
   // Suggestion: Log errors on external service (Like ElasticSearch)
-  console.error(`Request failed with status ${status}\nError: ${data.toString()}`)
+  console.error(message)
 }
 
 export const requestFailed = (status: number) => status < 200 || status > 299
@@ -23,7 +23,7 @@ export const validateResponse = <T>(
   const { data, status } = response
   const hasRequestFailed = requestFailed(status)
   if (hasRequestFailed) {
-    logError(data, status)
+    logError(Messages.REQUEST_FAILED(status, data))
     return errorResponse(errorMessage)
   }
 

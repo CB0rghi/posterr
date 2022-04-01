@@ -2,10 +2,10 @@ import React from 'react'
 import { render, screen } from '@testing-library/react'
 import { TestIds } from 'src/constants'
 import mockPost from 'src/mocks/post'
-import PostComponent from './Post'
+import Post from './Post'
 
 describe('Post', () => {
-  beforeEach(() => render(<PostComponent {...mockPost} />))
+  beforeEach(() => render(<Post post={mockPost} />))
 
   it('renders text', () => {
     const postText = screen.getByTestId(TestIds.Post.TEXT)

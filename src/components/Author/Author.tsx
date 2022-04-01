@@ -9,18 +9,19 @@ type AuthorProps = Prop & User
 
 export default function Author(props: AuthorProps) {
   const {
-    id, username, picturePath, ...rest
+    id, username, picturePath, name, ...rest
   } = props
 
   return (
-    <div className="flex items-center" {...rest}>
+    <div className="flex items-start" {...rest}>
       <Avatar
         data-testid={TestIds.Author.PICTURE}
         src={picturePath}
         username={username}
       />
+      <span className="font-semibold mx-2">{name}</span>
       <Link
-        className="ml-3 text-md leading-5 font-medium transition ease-in-out duration-100"
+        className="text-sm text-dark leading-5 transition ease-in-out duration-100"
         to={`/users/${id}`}
       >
         {username}

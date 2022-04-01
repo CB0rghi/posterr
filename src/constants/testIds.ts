@@ -19,6 +19,7 @@ const Profile = {
 
 const Post = {
   AUTHOR: 'post_author',
+  LIST: 'post_list',
   TYPE: 'post_type',
   TEXT: 'post_text'
 }

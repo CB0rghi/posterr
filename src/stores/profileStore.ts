@@ -1,29 +1,55 @@
 import { Post, Profile, User } from 'src/types'
 import create from 'zustand'
 import Services from 'src/services'
-import mockUser from 'src/mocks/user'
 
 interface ProfileState extends Profile {
-  setFollowers: (followers: number) => void
-  setFollowing: (following: number) => void
-  setJoinedAt: (joinedAt: Date) => void
+  addFollower: (userId: number) => void
+  removeFollower: (userId: number) => void
   setPosts: (posts: Post[]) => void
-  setUsername: (username: string) => void
   setUser: (user: User) => void
   loadProfile: (id: number) => Promise<void>
 }
 
 const initialState: Profile = {
-  followers: 0,
-  following: 0,
   posts: [],
-  user: mockUser
+  user: {
+    id: 0,
+    name: '',
+    username: '',
+    joinedAt: '',
+    followerIds: [],
+    followingIds: [],
+    picturePath: ''
+  }
 }
 
 const profileStore = create<ProfileState>(
-  (set) => ({
+  (set, get) => ({
     ...initialState,
-    setFollowers: (followers: number) => set((state) => ({ ...state, followers })),
+    addFollower: (userId: number) => {
+      const store = get()
+      const { followerIds } = store.user
+      const newFollowerIds = [...followerIds, userId]
+      set((state) => ({
+        ...state,
+        user: {
+          ...state.user,
+          followerIds: newFollowerIds
+        }
+      }))
+    },
+    removeFollower: (userId: number) => {
+      const store = get()
+      const { followerIds } = store.user
+      const newFollowerIds = followerIds.filter((id) => id !== userId)
+      set((state) => ({
+        ...state,
+        user: {
+          ...state.user,
+          followerIds: newFollowerIds
+        }
+      }))
+    },
     setFollowing: (following: number) => set((state) => ({ ...state, following })),
     setJoinedAt: (joinedAt: Date) => set((state) => ({ ...state, joinedAt })),
     setPosts: (posts: Post[]) => set((state) => ({ ...state, posts })),

@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react'
 import { Messages, Texts } from 'src/constants'
-import { useAuthStore, useFeedStore, useLayoutStore } from 'src/stores'
-import PostComponent from 'src/components/Post/Post'
+import { useUserStore, useFeedStore, useLayoutStore } from 'src/stores'
+import { Prop } from 'src/types'
+import PostList from '../PostList/PostList'
 
-const Feed = () => {
+function Feed(props: Prop) {
   const { startLoading, stopLoading } = useLayoutStore(
     (store) => (
       {
@@ -12,7 +13,7 @@ const Feed = () => {
       })
   )
 
-  const { user } = useAuthStore((store) => ({ user: store.loggedUser }))
+  const { user } = useUserStore((store) => ({ user: store.loggedUser }))
   const {
     filter, loadAllPosts, loadFollowingPosts, posts
   } = useFeedStore(
@@ -30,36 +31,18 @@ const Feed = () => {
     const loadPosts = async () => {
       const isFollowing = filter === Texts.FOLLOWING
       startLoading(Messages.LOADING_ITEM(Texts.POSTS))
-      if (isFollowing) {
-        // Load following posts only
+      if (isFollowing && user) {
         await loadFollowingPosts(user)
       } else {
-        // Load all posts
         await loadAllPosts()
       }
       stopLoading()
     }
 
     loadPosts()
-  }, [filter])
+  }, [filter, user?.followingIds])
 
-  // eslint-disable-next-line react/no-array-index-key
-  const renderPosts = () => (posts.map((post, i) => (<PostComponent key={i} {...post} />)))
-
-  const render = () => {
-    if (!posts.length) {
-      return <span>{Messages.NO_POSTS_FOUND}</span>
-    }
-
-    return (
-      <div>
-        <span>Feed</span>
-        {renderPosts()}
-      </div>
-    )
-  }
-
-  return render()
+  return <PostList {...props} posts={posts} />
 }
 
 export default Feed

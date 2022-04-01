@@ -4,12 +4,15 @@ import {
   Messages, TestIds, Texts
 } from 'src/constants'
 import { useParams, useNavigate } from 'react-router-dom'
-import Avatar from 'src/components/Avatar/Avatar'
-import Modal from 'src/components/Modal/Modal'
-import ProfileActionButton from 'src/components/ProfileActionButton/ProfileActionButton'
-import CountSection from 'src/components/CountSection/CountSection'
+import {
+  Avatar,
+  CountSection,
+  Modal,
+  PostList,
+  ProfileActionButton
+} from 'src/components'
 
-function UserProfile() {
+function Profile() {
   const userId = parseInt(useParams().userId as string, 10)
   const navigate = useNavigate()
 
@@ -55,7 +58,7 @@ function UserProfile() {
       return <div />
     }
     return (
-      <Modal title="User Profile" onClose={() => navigate('/')}>
+      <Modal title={Texts.PROFILE} onClose={() => navigate('/')}>
         <section className="w-full px-4">
           <div className="flex justify-between items-end">
             <Avatar
@@ -99,6 +102,7 @@ function UserProfile() {
               text="Following"
             />
           </div>
+          <PostList className="mt-6" posts={posts} />
         </section>
       </Modal>
     )
@@ -106,4 +110,4 @@ function UserProfile() {
   return renderIfNotLoading()
 }
 
-export default UserProfile
+export default Profile
