@@ -11,7 +11,7 @@ interface ProfileState extends Profile {
 }
 
 const initialState: Profile = {
-  posts: [],
+  postIds: [],
   user: {
     id: 0,
     name: '',
@@ -57,8 +57,9 @@ const profileStore = create<ProfileState>(
     loadProfile: async (id: number) => {
       const user = await Services.User.getById(id)
       set((state) => ({ ...state, user }))
-      const posts = await Services.Post.getPostsByAuthorIds([id])
-      set((state) => ({ ...state, posts }))
+      const posts = await Services.Post.getPostsByAuthorIds([id], 'ORIGINAL')
+      const ids = posts.map((post) => post.id)
+      set((state) => ({ ...state, postIds: ids }))
     },
     setUser: (user: User) => set((state) => ({ ...state, user }))
   })

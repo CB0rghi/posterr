@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { PostsFilter, Feed } from 'src/components'
-import { useFeedStore } from 'src/stores'
+import { usePostsStore } from 'src/stores'
 import { Outlet, useLocation } from 'react-router-dom'
 import { PostType } from 'src/modules'
 import { Texts } from 'src/constants'
@@ -10,7 +10,7 @@ function HomePage() {
   const location = useLocation()
   const {
     setFilter
-  } = useFeedStore((store) => ({
+  } = usePostsStore((store) => ({
     setFilter: store.setFilter
   }))
 
@@ -20,11 +20,11 @@ function HomePage() {
       const showAllPosts = PostType.isAll(pathname)
       const showFollowingPosts = PostType.isFollowing(pathname)
       if (showFollowingPosts) {
-        setFilter(Texts.FOLLOWING)
+        setFilter('Following')
       }
 
       if (showAllPosts) {
-        setFilter(Texts.ALL)
+        setFilter('All')
       }
     }
     init()

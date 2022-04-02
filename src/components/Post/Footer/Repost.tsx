@@ -1,7 +1,7 @@
 import React from 'react'
 import { Messages, Texts } from 'src/constants'
 import { faRetweet } from '@fortawesome/free-solid-svg-icons'
-import { useFeedStore, useUserStore } from 'src/stores'
+import { usePostsStore, useUserStore } from 'src/stores'
 import { Post, User } from 'src/types'
 import { toast } from 'react-toastify'
 import FooterAction from './FooterAction'
@@ -12,7 +12,7 @@ type ReportProps = {
 
 export default function Repost({ post }: ReportProps) {
   const { repostCount } = post
-  const { repost } = useFeedStore((store) => ({
+  const { repost } = usePostsStore((store) => ({
     repost: store.repost
   }))
 

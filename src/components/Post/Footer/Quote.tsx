@@ -8,6 +8,7 @@ import FooterAction from './FooterAction'
 type QuoteProps = {
   post: Post
 }
+
 export default function Quote({ post }: QuoteProps) {
   const [showModal, setModal] = useState(false)
   const { quoteCount: count } = post

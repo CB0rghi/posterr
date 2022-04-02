@@ -1,6 +1,10 @@
 import React, { useEffect } from 'react'
 import { Messages, Texts } from 'src/constants'
-import { useUserStore, useFeedStore, useLayoutStore } from 'src/stores'
+import {
+  useUserStore,
+  useLayoutStore,
+  usePostsStore
+} from 'src/stores'
 import { Prop } from 'src/types'
 import PostList from '../PostList/PostList'
 
@@ -14,18 +18,18 @@ function Feed(props: Prop) {
   )
 
   const { user } = useUserStore((store) => ({ user: store.loggedUser }))
+
   const {
-    filter, loadAllPosts, loadFollowingPosts, posts
-  } = useFeedStore(
-    (store) => (
-      {
-        filter: store.filter,
-        loadAllPosts: store.loadAllPosts,
-        loadFollowingPosts: store.loadFollowingPosts,
-        posts: store.posts
-      }
-    )
-  )
+    filter,
+    posts,
+    loadAllPosts,
+    loadFollowingPosts
+  } = usePostsStore((store) => ({
+    filter: store.filter,
+    posts: store.posts,
+    loadAllPosts: store.loadAllPosts,
+    loadFollowingPosts: store.loadFollowingPosts
+  }))
 
   useEffect(() => {
     const loadPosts = async () => {

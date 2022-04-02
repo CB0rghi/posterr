@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { useLayoutStore, useProfileStore } from 'src/stores'
+import { useLayoutStore, usePostsStore, useProfileStore } from 'src/stores'
 import {
   Messages, TestIds, Texts
 } from 'src/constants'
@@ -24,13 +24,19 @@ function Profile() {
     })
   )
 
-  const { user, loadProfile, posts } = useProfileStore(
+  const { posts } = usePostsStore((store) => ({
+    posts: store.posts
+  }))
+
+  const { user, loadProfile, postIds } = useProfileStore(
     (store) => ({
       loadProfile: store.loadProfile,
-      posts: store.posts,
+      postIds: store.postIds,
       user: store.user
     })
   )
+
+  const profilePosts = posts.filter((post) => postIds.includes(post.id))
 
   useEffect(() => {
     const loadUserData = async () => {
@@ -88,7 +94,7 @@ function Profile() {
           <div className="flex justify-between pt-2">
             <CountSection
               data-testid={TestIds.Profile.POSTS_COUNT}
-              number={posts.length}
+              number={profilePosts.length}
               text={Texts.POSTS}
             />
             <CountSection
@@ -102,7 +108,7 @@ function Profile() {
               text="Following"
             />
           </div>
-          <PostList className="mt-6" posts={posts} />
+          <PostList className="mt-6" posts={profilePosts} />
         </section>
       </Modal>
     )

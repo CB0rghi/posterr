@@ -1,6 +1,6 @@
 import React from 'react'
-import { useFeedStore, useProfileStore } from 'src/stores'
-import { Messages, Texts } from 'src/constants'
+import { usePostsStore, useProfileStore } from 'src/stores'
+import { Messages } from 'src/constants'
 import { render, screen } from '@testing-library/react'
 import { act } from 'react-dom/test-utils'
 import { Post } from 'src/types'
@@ -13,7 +13,7 @@ describe('Feed', () => {
 
   it('render NO_POSTS_MESSAGE when there\'s no post', () => {
     act(() => {
-      useProfileStore.setState({ posts: [] })
+      usePostsStore.setState({ posts: [] })
     })
     const noPostsFoundComponent = screen.getByText(Messages.NO_POSTS_FOUND)
     expect(noPostsFoundComponent).toBeInTheDocument()
@@ -25,7 +25,7 @@ describe('Feed', () => {
     ]
 
     act(() => {
-      useFeedStore.setState({ posts: mockedPosts })
+      usePostsStore.setState({ posts: mockedPosts })
     })
 
     mockedPosts.forEach((post) => {
@@ -35,10 +35,10 @@ describe('Feed', () => {
   })
 
   it('shows only following users posts if configured', () => {
-    const loadFollowingPostsSpy = jest.spyOn(useFeedStore.getState(), 'loadFollowingPosts')
+    const loadFollowingPostsSpy = jest.spyOn(usePostsStore.getState(), 'loadFollowingPosts')
     act(() => {
       useProfileStore.setState({ user: mockUser })
-      useFeedStore.setState({ filter: Texts.FOLLOWING })
+      usePostsStore.setState({ filter: 'Following' })
     })
     expect(loadFollowingPostsSpy).toHaveBeenCalled()
   })

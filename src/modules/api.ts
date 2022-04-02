@@ -11,6 +11,7 @@ export const mockThrottle = async () => waitFor(throtlleMilliseconds)
 
 export const logError = (message: string) => {
   // Suggestion: Log errors on external service (Like ElasticSearch)
+  // eslint-disable-next-line no-console
   console.error(message)
 }
 

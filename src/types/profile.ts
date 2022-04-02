@@ -1,8 +1,7 @@
-import Post from './post'
 import User from './user'
 
 type Profile = {
-  posts: Post []
+  postIds: string []
   user: User
 }
 export default Profile

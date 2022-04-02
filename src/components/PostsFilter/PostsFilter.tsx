@@ -1,12 +1,12 @@
 import React from 'react'
 import Switch from 'react-switch'
 import { Texts } from 'src/constants'
-import { useFeedStore } from 'src/stores'
 import { useNavigate } from 'react-router-dom'
-import { Prop } from 'src/types'
+import { PostsFilter as PostsFilterType, Prop } from 'src/types'
+import { usePostsStore } from 'src/stores'
 
 export default function PostsFilter({ className }: Prop) {
-  const { filter, setFilter } = useFeedStore(
+  const { filter, setFilter } = usePostsStore(
     (store) => (
       {
         filter: store.filter,
@@ -16,16 +16,16 @@ export default function PostsFilter({ className }: Prop) {
   )
   const navigate = useNavigate()
 
-  const switchFilter = (newValue: string) => {
+  const switchFilter = (newValue: PostsFilterType) => {
     setFilter(newValue)
     navigate(`/${newValue.toLowerCase()}`)
   }
 
   const handleChange = (isFollowing: boolean) => {
     if (isFollowing) {
-      switchFilter(Texts.FOLLOWING)
+      switchFilter('Following')
     } else {
-      switchFilter(Texts.ALL)
+      switchFilter('All')
     }
   }
 

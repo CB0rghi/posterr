@@ -7,7 +7,7 @@ import Profile from './Profile'
 
 describe('User Profile', () => {
   const profileMock: ProfileType = {
-    posts: [],
+    postIds: [],
     user: mockUser
   }
 
@@ -30,11 +30,11 @@ describe('User Profile', () => {
   })
 
   it('shows user posts', async () => {
-    const { posts } = profileMock
+    const { postIds } = profileMock
     const postsTitle = screen.getByText(Texts.POSTS)
     const postsCountComponent = screen.getByTestId(TestIds.Profile.POSTS_COUNT)
     expect(postsTitle).toBeInTheDocument()
-    expect(postsCountComponent.textContent).toBe(posts)
+    expect(postsCountComponent.textContent).toBe(postIds)
   })
 
   // it('shows following component if profile is followed by logged user')

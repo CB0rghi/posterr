@@ -2,7 +2,11 @@ import React, { useState } from 'react'
 import Modal from 'src/components/Modal/Modal'
 import { Messages, Texts } from 'src/constants'
 import { isOriginal, isQuote } from 'src/modules/postType'
-import { useFeedStore, useLayoutStore, useUserStore } from 'src/stores'
+import {
+  useLayoutStore,
+  usePostsStore,
+  useUserStore
+} from 'src/stores'
 import { Post, PostType, User } from 'src/types'
 import CustomButton from '../Buttons/CustomButton/CustomButton'
 import CustomTextarea from '../Form/CustomTextarea'
@@ -30,9 +34,9 @@ export default function Comment({
     stopLoading: store.stopLoading
   }))
 
-  const { addPost, quote } = useFeedStore(
+  const { create, quote } = usePostsStore(
     (store) => ({
-      addPost: store.addPost,
+      create: store.create,
       quote: store.quote
     })
   )
@@ -44,7 +48,7 @@ export default function Comment({
   const createPost = async () => {
     startLoading(Messages.CREATING_ITEM(Texts.NEW_POST))
     if (isOriginal(type)) {
-      await addPost(text, loggedUser)
+      await create(text, loggedUser)
     } else if (isQuote(type)) {
       await quote(text, post as Post, loggedUser)
     }
