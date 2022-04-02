@@ -50,6 +50,7 @@ module.exports = {
     ],
     'import/prefer-default-export': 'off',
     'no-shadow': 'off',
+    'no-plusplus': 'off',
     'no-return-await': 'off',
     'no-promise-executor-return': 'off',
     'react/function-component-definition': [

@@ -30,7 +30,7 @@ export default function PostFooter({ post }: PostFooterProps) {
   }
   return (
     <div className="flex items-center justify-between w-full">
-      <Quote />
+      <Quote post={post} />
       {actionsIfNotAuthor()}
     </div>
   )

@@ -17,11 +17,8 @@ export default function Post(props: PostProps) {
 
   const {
     author,
-    repostedBy,
-    quoted,
-    timestamp,
-    text,
-    type
+    createdAt,
+    text
   } = post
 
   const {
@@ -30,14 +27,6 @@ export default function Post(props: PostProps) {
     username,
     name
   } = author
-
-  const owner = () => {
-    if (type === 'REPOST') { return repostedBy }
-
-    if (type === 'QUOTE') { return quoted?.author }
-
-    return undefined
-  }
 
   return (
     <article
@@ -58,23 +47,22 @@ export default function Post(props: PostProps) {
       </div>
       <div className="w-full">
         <PostTypeLabel
-          className="text-center"
+          className="w-full"
           data-testid={TestIds.Post.TYPE}
-          type={type}
-          postOwner={owner()}
+          post={post}
         />
         <PostHeader
           userId={authorId}
           name={name}
           username={username}
-          timestamp={timestamp}
+          createdAt={createdAt}
         />
         <p
           data-testid={TestIds.Post.TEXT}
-          // eslint-disable-next-line react/no-danger
-          dangerouslySetInnerHTML={{ __html: text }}
           className="py-2 text-base width-auto text-black flex-shrink"
-        />
+        >
+          {text}
+        </p>
         <PostFooter post={post} />
       </div>
     </article>

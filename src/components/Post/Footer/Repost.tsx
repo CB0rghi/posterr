@@ -1,8 +1,9 @@
 import React from 'react'
-import { Texts } from 'src/constants'
+import { Messages, Texts } from 'src/constants'
 import { faRetweet } from '@fortawesome/free-solid-svg-icons'
 import { useFeedStore, useUserStore } from 'src/stores'
 import { Post, User } from 'src/types'
+import { toast } from 'react-toastify'
 import FooterAction from './FooterAction'
 
 type ReportProps = {
@@ -10,6 +11,7 @@ type ReportProps = {
 }
 
 export default function Repost({ post }: ReportProps) {
+  const { repostCount } = post
   const { repost } = useFeedStore((store) => ({
     repost: store.repost
   }))
@@ -17,6 +19,10 @@ export default function Repost({ post }: ReportProps) {
   const user = useUserStore((store) => store.loggedUser) as User
 
   const handleClick = async () => {
+    if (post.repost?.author.id === user.id) {
+      toast.error(Messages.ALREADY_REPOSTED)
+      return
+    }
     await repost(post, user)
   }
 
@@ -24,7 +30,7 @@ export default function Repost({ post }: ReportProps) {
     <FooterAction
       title={Texts.REPOST}
       icon={faRetweet}
-      count={0}
+      count={repostCount}
       onClick={handleClick}
     />
   )

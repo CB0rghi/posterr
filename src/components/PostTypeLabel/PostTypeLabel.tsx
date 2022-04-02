@@ -1,26 +1,25 @@
 import React from 'react'
-import { PostType, Prop, User } from 'src/types'
+import { Messages } from 'src/constants'
+import {
+  isOriginal, isQuote, isRepost
+} from 'src/modules/postType'
+import {
+  Post,
+  Prop
+} from 'src/types'
+import Quote from './Quote'
+import Repost from './Repost'
 
 type PostTypeProps = Prop & {
-  type: PostType
-  postOwner?: User
+  post: Post
 }
 
-const getTypeLabel = (type: 'REPOST' | 'QUOTE') => (
-  type === 'REPOST'
-    ? 'Reposted'
-    : 'Quoted'
-)
-
 export default function PostTypeComponent(props: PostTypeProps) {
-  const { type, className, postOwner } = props
-  if (type === 'ORIGINAL') return <div />
+  const { post } = props
+  const { type } = post
 
-  const classes = `
-    ${className} 
-    text-xs text-gray-500
-  `
-  const typeLabel = getTypeLabel(type)
-  const message = `${typeLabel} by ${postOwner?.name}`
-  return <div className={classes}>{message}</div>
+  if (isOriginal(type)) return <div />
+  if (isRepost(type)) return <Repost post={post} />
+  if (isQuote(type)) return <Quote post={post} />
+  throw Error(Messages.TYPE_NOT_IMPLEMENTED)
 }

@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
+import { Prop } from 'src/types'
 
-type CustomButtonProps = {
+type CustomButtonProps = Prop & {
   disabled?: boolean
   textOnHover?: string
   text: string
@@ -8,7 +9,10 @@ type CustomButtonProps = {
 }
 
 export default function CustomButton({
-  disabled = false, onClick, text, textOnHover
+  disabled = false,
+  onClick,
+  text,
+  textOnHover
 }: CustomButtonProps) {
   const [hovering, setHovering] = useState(false)
 

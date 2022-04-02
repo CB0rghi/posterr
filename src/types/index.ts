@@ -1,5 +1,7 @@
 export type { default as BaseResponse } from './baseResponse'
 export type { default as Post } from './post'
+export type { default as Repost } from './repost'
+export type { default as Quote } from './quote'
 export type { default as PostType } from './postType'
 export type { default as Profile } from './profile'
 export type { default as Prop } from './prop'

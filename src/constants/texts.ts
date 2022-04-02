@@ -3,6 +3,8 @@ const FOLLOWING = 'Following'
 const NEW_POST = 'New Post'
 const HOME = 'Home'
 const LIKE = 'Like'
+const ORIGINAL = 'Original'
+const POST = 'Post'
 const POSTS = 'Posts'
 const PROFILE = 'Profile'
 const REPOST = 'Repost'
@@ -15,6 +17,8 @@ export default {
   NEW_POST,
   HOME,
   LIKE,
+  ORIGINAL,
+  POST,
   POSTS,
   PROFILE,
   QUOTE,

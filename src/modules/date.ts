@@ -30,3 +30,5 @@ export const timeDifference = (previous: number) => {
 
   return `${Math.round(elapsed / msPerYear)} years ago`
 }
+
+export const currentTimestamp = () => (new Date().getTime())
