@@ -1,6 +1,6 @@
 import React from 'react'
 import Switch from 'react-switch'
-import { Texts } from 'src/constants'
+import { TestIds, Texts } from 'src/constants'
 import { useNavigate } from 'react-router-dom'
 import { PostsFilter as PostsFilterType, Prop } from 'src/types'
 import { usePostsStore } from 'src/stores'
@@ -32,7 +32,7 @@ export default function PostsFilter({ className }: Prop) {
   const isFollowing = filter === Texts.FOLLOWING
 
   return (
-    <div className={`flex items-center ${className}`}>
+    <div data-testid={TestIds.Post.FILTER_SWITCH} className={`flex items-center ${className}`}>
       <span>{Texts.ALL}</span>
       <Switch
         className="px-5"

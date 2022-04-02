@@ -26,7 +26,7 @@ function Feed(props: Prop) {
     loadFollowingPosts
   } = usePostsStore((store) => ({
     filter: store.filter,
-    posts: store.posts,
+    posts: store.feedPosts,
     loadAllPosts: store.loadAllPosts,
     loadFollowingPosts: store.loadFollowingPosts
   }))

@@ -63,7 +63,10 @@ export default function Post(props: PostProps) {
         >
           {text}
         </p>
-        <PostFooter post={post} />
+        <PostFooter
+          data-testid={TestIds.Post.ACTIONS}
+          post={post}
+        />
       </div>
     </article>
   )

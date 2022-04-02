@@ -4,8 +4,9 @@ const Author = {
 }
 
 const Home = {
-  POSTS: 'home-page_posts',
-  SWITCHER: 'home-page_switcher'
+  FEED: 'home-page_feed',
+  SWITCHER: 'home-page_switcher',
+  TITLE: 'home-page_title'
 }
 
 const Profile = {
@@ -18,8 +19,10 @@ const Profile = {
 }
 
 const Post = {
+  ACTIONS: 'post_actions',
   AUTHOR: 'post_author',
   LIST: 'post_list',
+  FILTER_SWITCH: 'post_filter_switch',
   TYPE: 'post_type',
   TEXT: 'post_text'
 }

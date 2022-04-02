@@ -3,29 +3,25 @@ import { usePostsStore, useProfileStore } from 'src/stores'
 import { Messages } from 'src/constants'
 import { render, screen } from '@testing-library/react'
 import { act } from 'react-dom/test-utils'
-import { Post } from 'src/types'
-import mockPost from 'src/mocks/post'
+import mockedPosts from 'src/mocks/posts'
+import { MemoryRouter } from 'react-router-dom'
 import mockUser from 'src/mocks/user'
 import Feed from './Feed'
 
 describe('Feed', () => {
-  beforeEach(() => render(<Feed />))
+  beforeEach(() => render(<Feed />, { wrapper: MemoryRouter }))
 
   it('render NO_POSTS_MESSAGE when there\'s no post', () => {
     act(() => {
-      usePostsStore.setState({ posts: [] })
+      usePostsStore.setState({ feedPosts: [] })
     })
     const noPostsFoundComponent = screen.getByText(Messages.NO_POSTS_FOUND)
     expect(noPostsFoundComponent).toBeInTheDocument()
   })
 
   it('render posts when exists', () => {
-    const mockedPosts: Post[] = [
-      mockPost
-    ]
-
     act(() => {
-      usePostsStore.setState({ posts: mockedPosts })
+      usePostsStore.setState({ feedPosts: mockedPosts })
     })
 
     mockedPosts.forEach((post) => {

@@ -1,16 +1,12 @@
 import React from 'react'
 import { useUserStore } from 'src/stores'
-import { Post } from 'src/types'
+import PostActionProps from 'src/types/postActionProps'
 import Repost from './Repost'
 import Quote from './Quote'
 import Like from './Like'
 import Share from './Share'
 
-type PostFooterProps= {
-  post: Post
-}
-
-export default function PostFooter({ post }: PostFooterProps) {
+export default function PostFooter({ post, ...rest }: PostActionProps) {
   const { loggedUser } = useUserStore((store) => ({
     loggedUser: store.loggedUser
   }))
@@ -29,7 +25,7 @@ export default function PostFooter({ post }: PostFooterProps) {
     )
   }
   return (
-    <div className="flex items-center justify-between w-full">
+    <div {...rest} className="flex items-center justify-between w-full">
       <Quote post={post} />
       {actionsIfNotAuthor()}
     </div>

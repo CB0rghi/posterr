@@ -1,6 +1,7 @@
 import Post from './post'
+import Prop from './prop'
 
-type PostActionProps = {
+type PostActionProps = Prop & {
   post: Post
 }
 

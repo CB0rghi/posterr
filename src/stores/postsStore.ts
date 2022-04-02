@@ -18,6 +18,7 @@ interface PostsState {
   loadFollowingPosts: (user: User) => Promise<void>
 
   posts: Post[]
+  feedPosts: Post[]
   filter: PostsFilter
   setFilter: (value: PostsFilter) => void
 
@@ -28,6 +29,7 @@ interface PostsState {
 
 const initialState = {
   filter: 'All' as PostsFilter,
+  feedPosts: [],
   posts: []
 }
 
@@ -97,12 +99,12 @@ const postsStore = create(persist<PostsState>(
     },
     loadAllPosts: async () => {
       const posts = await Services.Post.getPosts()
-      set((state) => ({ ...state, posts }))
+      set((state) => ({ ...state, posts, feedPosts: posts }))
     },
     loadFollowingPosts: async (user: User) => {
       const { followingIds } = user
       const posts = await Services.Post.getPostsByAuthorIds(followingIds, 'ORIGINAL')
-      set((state) => ({ ...state, posts }))
+      set((state) => ({ ...state, feedPosts: posts }))
     },
     setFilter: (value: PostsFilter) => set((state) => ({ ...state, filter: value })),
     repost: async (post: Post, author: User) => {

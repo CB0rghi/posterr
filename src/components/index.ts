@@ -1,4 +1,3 @@
-export { default as Author } from './Author/Author'
 export { default as Avatar } from './Avatar/Avatar'
 
 export { default as CountSection } from './CountSection/CountSection'
