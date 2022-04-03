@@ -20,11 +20,11 @@ A twitter-based application built with clean, solid and testable code.
   *  Create Post
 
 ## Built with
-:electron: React 
-* Typescript 
-* TailwindCSS
-* ESLint
-* Jest  
+* ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB) 
+* ![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
+* ![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)
+* ![ESLint](https://img.shields.io/badge/ESLint-4B3263?style=for-the-badge&logo=eslint&logoColor=white)
+* ![Jest](https://img.shields.io/badge/-jest-%23C21325?style=for-the-badge&logo=jest&logoColor=white)  
 🐻 Zustand 
   * A revolutionary react state management lib
 * Json-Server
@@ -36,7 +36,7 @@ A twitter-based application built with clean, solid and testable code.
 * Yarn
 
 # Usage
-## With Docker 🐋
+## With ![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)
 1. In the root folder, run
   ```
   docker-compose up
