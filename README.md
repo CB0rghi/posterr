@@ -24,7 +24,7 @@ A twitter-based application built with clean, solid and testable code.
 * Typescript 
 * TailwindCSS
 * ESLint
-* Jest
+* Jest  
 🐻 Zustand 
   * A revolutionary react state management lib
 * Json-Server
