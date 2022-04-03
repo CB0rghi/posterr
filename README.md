@@ -3,16 +3,16 @@
 A twitter-based application built with clean, solid and testable code.
 
 ## Features
-* Post
+* Post  💬
   *   Create
   *   Share
   *   Quote
   
-* Home Page
+* Home Page 🏠
   *   All Posts
   *   Following Posts
 
-* User Profile
+* User Profile 🧔
   *  Posts Count
   *  Followers
   *  Following
@@ -20,12 +20,12 @@ A twitter-based application built with clean, solid and testable code.
   *  Create Post
 
 ## Built with
-* React 
-* Typescript
+* React :electron:
+* Typescript 
 * TailwindCSS
 * ESLint
 * Jest
-* Zustand
+* Zustand 🐻
   * A revolutionary react state management lib
 * Json-Server
   * To stub api requests
@@ -36,7 +36,7 @@ A twitter-based application built with clean, solid and testable code.
 * Yarn
 
 # Usage
-## With Docker
+## With Docker 🐋
 1. In the root folder, run
   ```
   docker-compose up
